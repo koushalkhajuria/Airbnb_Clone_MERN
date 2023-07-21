@@ -1,6 +1,5 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cors = require('cors')
 const bodyParser = require('body-parser');
 const roomRouter = require('./routes/roomRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -26,7 +25,19 @@ app.use(bodyParser.json({ limit: '20mb' }));
 //   next();
 // });
 
-app.use(cors());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE'
+  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials (e.g., cookies)
+
+  next();
+});
+
 app.use(cookieParser());
 
 app.use('/api/v1', authRouter);
