@@ -52,6 +52,7 @@ const HomeImages = () => {
         setFormSubmitted(false);
         createHost(hostData);
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hostData])
 
     const createHost = async (data) => {

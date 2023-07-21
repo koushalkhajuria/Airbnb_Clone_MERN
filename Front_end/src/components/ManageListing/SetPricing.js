@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
 import { axiosPrivate } from '../../services/axios';
 import { showNotification } from '../../assets/alerts/sweetAlert';
-import AuthContext from '../../context/AuthProvider';
 
 const SetPricing = ({item}) => {
 

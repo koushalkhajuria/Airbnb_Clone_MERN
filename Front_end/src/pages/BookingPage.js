@@ -1,10 +1,8 @@
-import React, { useContext } from 'react'
-import BookingContext from '../context/BookingProvider'
+import React from 'react'
 import BookRoom from '../components/Booking/BookRoom';
 import Header from '../components/Header/Header';
 
 function BookingPage() {
-  const {bookingData} = useContext(BookingContext);
   return (
     <>
       <Header/>

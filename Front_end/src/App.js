@@ -3,8 +3,6 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import SearchPage from './pages/SearchPage';
-import CheckAuth from './components/Auth/CheckAuth';
 import RoomPage from './pages/RoomPage';
 import { RoomIdProvider } from './context/RoomIdProvider';
 import { BookingProvider } from './context/BookingProvider';

@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@mui/material';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
-import AuthContext from '../../context/AuthProvider';
 import { showNotification } from '../../assets/alerts/sweetAlert';
 import { useLocation, useNavigate } from 'react-router-dom';
 

@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import SetProfileForm from './SetProfileForm';
 import { showNotification } from '../../assets/alerts/sweetAlert';
-import AuthContext from '../../context/AuthProvider';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 const SetProfileFinal = (item) => {
-  const {auth} = useContext(AuthContext);
   const axiosPrivate = useAxiosPrivate();
   const [openCard3, setOpenCard3] = useState(false);
 

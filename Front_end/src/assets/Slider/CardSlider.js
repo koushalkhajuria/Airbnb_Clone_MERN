@@ -37,7 +37,7 @@ const CardSlider = ({ children }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [intervalId]);
 
   return (
     <>

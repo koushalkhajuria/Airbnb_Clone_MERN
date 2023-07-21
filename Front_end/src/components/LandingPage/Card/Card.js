@@ -33,6 +33,7 @@ function Card(props) {
     }
     setSearchData('')
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[quickSearch, searchData])
 
 

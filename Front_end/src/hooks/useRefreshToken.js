@@ -2,7 +2,7 @@ import { axiosNormal } from '../services/axios';
 import useAuth from './useAuth';
 
 const useRefreshToken = () => {
-    const {auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
 
     const refresh = async () => {
         const response = await axiosNormal.get(`/auth/refresh`, {headers: {'Content-Type': 'application/json'},
