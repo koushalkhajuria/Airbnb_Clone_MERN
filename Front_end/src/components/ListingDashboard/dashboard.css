@@ -1,0 +1,70 @@
+.listing-card-container{
+  padding:1.5rem;
+  margin: 2rem 5rem;
+  border: 1px solid rgb(221, 221, 221); 
+  border-radius: .9rem; 
+  color: var(--font-grey);
+  letter-spacing: .5px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px
+}
+
+.dashboard-host-profile img{
+  width: 4.5rem;
+  margin-right: 6rem;
+  border-radius: 3rem;
+  height: 4.5rem;
+
+}
+
+
+
+
+.manage-button-flex{
+  display: flex;
+  gap:1rem;
+  justify-content: flex-end;
+}
+
+
+.manage-edit-button {
+  text-align: center;
+  width: 30%;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background-color: #007bff; 
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.manage-edit-button:hover {
+  background-color: #1068c7;
+}
+
+.manage-delete-button {
+  padding: .5rem;
+  text-align: center;
+  width: 30%;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background-color: #dd1063;
+  color: #fff;
+  border: none;
+  border-radius: .3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.manage-delete-button:hover {
+  background-color: #cd0c59;
+
+}
+
+
+
