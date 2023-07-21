@@ -128,7 +128,7 @@ function ListingCard() {
         <div className="section_container">
           {dataList.length!==0 ? 
             dataList.result>0?
-          dataList.data.map(mapData):"No Result found" 
+          dataList.data.map(mapData):"You are not a host Yet" 
           :
           <SpinLoader/>
           }

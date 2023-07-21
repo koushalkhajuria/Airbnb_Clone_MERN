@@ -37,7 +37,6 @@ const ProfileMenu = () => {
   const logOut = async (id, data) => {
     try {
       const response = await axiosPrivate.get(`/auth/logout`);
-      console.log(response);
       showNotification(response.data.status, response.data.message);
     } catch (err) {
       console.error(err);

@@ -82,7 +82,7 @@ function MyBookingCard() {
           <div className="my-booking">
             {dataList.length!==0 ? 
               dataList.result>0?
-            dataList.data.map(mapData):"No Result found" 
+            dataList.data.map(mapData):"You have yet to book anything" 
             :
             <SpinLoader/>
             }

@@ -33,7 +33,6 @@ const HostProfileForm = ({goToNext}) => {
 
   const handleSubmit = async (values) => {
     const image =await handleImageUpload(values.image)
-    console.log(image);
     const host = {
       name: values.name,
       profile: image,

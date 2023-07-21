@@ -14,7 +14,6 @@ function RoomPage() {
   const {roomId} = useContext(IdContext);
   const axiosPrivates = useAxiosPrivate();
   const navigate = useNavigate();
-  const {auth} = useContext(AuthContext);
   const location = useLocation();
   const [individualRoomData, setIndividualRoomData] = useState({});
 
@@ -23,15 +22,13 @@ function RoomPage() {
   useEffect( ()=> {
     async function fetchData() {
       try{
-        console.log(auth)
         const response = await axiosPrivates.get(`/${roomId._id}`,{
           withCredentials:true
         })
         setIndividualRoomData(response.data.data)
       } catch (err) {
-        console.log(err)
-        navigate('/login', {state: {from: location}, replace: true})
         console.error(err);
+        navigate('/login', {state: {from: location}, replace: true})
       }     
     }
     fetchData();

@@ -29,7 +29,6 @@ const LoginForm = () => {
     try {
       const response = await axiosNormal.post('/auth/login', data)
       await setAuth(response.data)
-      console.log(response.data);
       showNotification(response.data.status, response.data.message)
       resetForm();
       navigate(from, {replace:true});

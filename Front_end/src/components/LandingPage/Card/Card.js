@@ -20,7 +20,6 @@ function Card(props) {
     setDataList([]);
     setQuickSearch(data);
   }
-  console.log(dataList);
   useEffect(()=> {
     setIsLoading(true);
     if(quickSearch){
@@ -30,7 +29,6 @@ function Card(props) {
       fetchDataBySearchParam(searchData);
     }
     else{
-      console.log(searchData);
       fetchData();
     }
     setSearchData('')

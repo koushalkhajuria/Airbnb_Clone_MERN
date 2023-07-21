@@ -66,7 +66,7 @@ function BookRoom() {
   const handleAction = async () => {
     await bookApi()
   }
-console.log(bookingData);
+
   const bookApi = async () => {
     try {
       const response = await axiosPrivate.post('/room/booking', bookingData);
@@ -85,17 +85,17 @@ console.log(bookingData);
       <ThemeProvider theme={airbnbTheme}>
         <div>
           <Dialog open={open} onClose={handleDialogClose}>
-            <DialogTitle><h3>Confirmation</h3></DialogTitle>
-            <DialogContent>
+            <DialogTitle sx={{width:'15rem', textAlign:'center'}}>Confirmation</DialogTitle>
+            <DialogContent sx={{width:'15rem', textAlign:'center'}}>
               <DialogContentText>
-                <p>Confirm your Booking</p> 
+                Confirm your Booking 
               </DialogContentText>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={handleDialogClose} color="primary">
+            <DialogActions >
+              <Button  onClick={handleDialogClose}  color="primary">
                 Cancel
               </Button>
-              <Button onClick={handleAction} color="primary">
+              <Button onClick={handleAction} variant ="contained" color="primary">
                 Confirm
               </Button>
             </DialogActions>

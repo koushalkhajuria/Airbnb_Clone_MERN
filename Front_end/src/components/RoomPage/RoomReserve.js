@@ -19,7 +19,6 @@ function RoomReserve({data}) {
     setGuests(guests + 1);
   };
 
-  console.log(auth);
   const handleGuestDecrement = () => {
     if (guests > 1) {
       setGuests(guests - 1);

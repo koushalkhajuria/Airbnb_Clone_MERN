@@ -56,7 +56,6 @@ const HomeImages = () => {
 
     const createHost = async (data) => {
       try {
-        console.log(data.images);
         const response = await axiosPrivate.post('/', data);
         if(response.data) {
           showNotification(response.data.status, response.data.message);

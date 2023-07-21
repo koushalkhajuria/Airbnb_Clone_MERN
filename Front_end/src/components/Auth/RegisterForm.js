@@ -3,7 +3,6 @@ import './register.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { registerSchema } from '../../schemas';
-import { registerUser } from '../../services/api';
 import { showNotification } from '../../assets/alerts/sweetAlert';
 import AuthContext from '../../context/AuthProvider';
 import { axiosNormal } from '../../services/axios';
@@ -36,7 +35,6 @@ const RegisterForm = () => {
      try {
       const response = await axiosNormal.post('/auth/register', data)
       await setAuth(response.data)
-      console.log(response.data);
       showNotification(response.data.status, response.data.message)
       resetForm();
       navigate(from, {replace:true});

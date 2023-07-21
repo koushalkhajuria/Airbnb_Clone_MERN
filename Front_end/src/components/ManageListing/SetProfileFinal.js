@@ -27,7 +27,6 @@ const SetProfileFinal = (item) => {
   const updateHostProfile = async (id, data) => {
     try {
       const response = await axiosPrivate.patch(`/${id}`, data);
-      console.log(response);
       showNotification(response.data.status, response.data.message);
     } catch (err) {
       console.error(err);
