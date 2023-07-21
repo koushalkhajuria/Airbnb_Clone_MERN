@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './register.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -18,7 +18,7 @@ const initialValues = {
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-  const {auth, setAuth} = useContext(AuthContext);
+  const { setAuth} = useContext(AuthContext);
   const location = useLocation();
   const from = location.state?.from?.pathname || '/'
   const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
