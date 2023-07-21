@@ -7,8 +7,6 @@ import IdContext from '../context/RoomIdProvider';
 import SpinLoader  from '../assets/spinner/spinner';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AuthContext from '../context/AuthProvider';
-
 
 function RoomPage() {
   const {roomId} = useContext(IdContext);
@@ -32,6 +30,7 @@ function RoomPage() {
       }     
     }
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[roomId._id])
   return (
     <>
