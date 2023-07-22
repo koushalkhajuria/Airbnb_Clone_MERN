@@ -164,4 +164,132 @@
   background-color: #cd0c59;
 }
 
+@media only screen and (max-width:1300px){
+  .book-room-container{
+    width:90%;
+  }
+}
+
+@media only screen and (max-width:1100px){
+  .book-room-details{
+    display: block;
+  }
+
+  .book-room-title{
+    width: fit-content;
+    margin: auto;
+  }
+  
+  .book-room-details-left{
+    width: 90%;
+  }
+  .book-room-details-right{
+    margin-top: 2rem;
+    width: 86%;
+  }
+}
+
+@media only screen and (max-width:1300px){
+  .br-left-1:nth-child(2){
+    border-bottom: none;
+  }
+  .book-room-container{
+    width:90%;
+  }
+}
+@media only screen and (max-width:640px){
+  .book-room-container{
+    margin-top: 2rem;
+  }
+  
+  .book-room-title{
+    margin-bottom: .5rem;;
+  }
+
+  .book-room-container{
+    width:100%;
+  }
+  .book-room-details{
+    padding:0 3rem;
+  }
+  .book-room-details-left{
+    width: 100%;
+  }
+  .book-room-details-right{
+    margin-top: 2rem;
+    width: 86%;
+  }
+}
+
+@media only screen and (max-width: 510px){
+  .payment-input{
+    width: 8rem;;
+  }
+  .payment-width{
+    width: 18rem;
+  }
+}
+
+
+@media only screen and (max-width: 440px){
+  .payment-input{
+    width: 5rem;;
+  }
+  .br-right-content-1{
+    display: block;
+    text-align: center;
+
+  }
+  
+  .payment-width{
+    width: 18rem;
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .book-room-details{
+    padding:0 2rem;
+  }
+  .payment-input{
+    width: 5rem;;
+  }
+  .payment-width{
+    width: 18rem;
+  }
+}
+
+@media only screen and (max-width: 390px){
+  .book-room-title{
+    font-size: 1.8rem;
+  }
+  .booking-pricing-container{
+    display: block;
+    margin-bottom:1rem;
+
+  }
+
+  .book-room-details{
+    padding:0 2rem;
+  }
+
+  .payment-width{
+    width: 14rem;
+  }
+}
+
+@media only screen and (max-width: 320px){
+
+
+  .book-room-details{
+    padding:0 1rem;
+  }
+
+  .payment-width{
+    width: 12rem;
+  }
+}
+
+
+
+
 

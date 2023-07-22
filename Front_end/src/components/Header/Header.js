@@ -54,7 +54,7 @@ function Header(props) {
       <img onClick={handleHome} src={logo} alt="airbnb logo" className="navbar-logo" />
       <div className={`search-bar ${openSearchBar?'active':''}`}  onClick={handleSearchBarChange}>
         <div className="search-bar-text">Anywhere</div>
-        <div className="search-bar-text search-bar-text1">Any week</div>
+        <div className="search-bar-text search-bar-text1">Anyweek</div>
         <div className="search-bar-text2">Add Guests</div>
         <div className="search-icon-div">
           <SearchRoundedIcon className="search-icon" sx={{ fontSize: "1.2rem" }} />

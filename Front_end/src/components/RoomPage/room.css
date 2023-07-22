@@ -28,6 +28,29 @@
   gap: .3rem;
 }
 
+@media only screen and (max-width: 810px) {
+  .room-save{
+    display: none;
+  }
+  .room-description-container{
+    padding: 2.5rem 2rem 2rem 2rem;
+  }
+
+  .room-description{
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .room-description-container{
+    padding: 2.5rem 1rem 2rem 1rem;
+  }
+
+  .room-description{
+    font-size: 1.2rem;
+  }
+}
+
 
 /* ------------------------- ImageContainer------------------ */
 
@@ -39,6 +62,7 @@
 
 .room-image-primary {
   width:50%;
+  height: 50%;
   padding:.2rem ;
 }
 
@@ -53,8 +77,10 @@
 
 .room-image-secondary {
   width: 49%;
+  width: 49%;
   display: flex;
   flex-wrap: wrap;
+  padding-bottom:.4rem;
 }
 
 .room-image-secondary-child {
@@ -90,6 +116,66 @@
 }
 
 
+@media only screen and (max-width: 1469px){
+  
+  .room-image-primary {
+    width:50%;
+    height: 49%;
+  }
+
+  .room-image-secondary {
+    width: 49%;
+    height: 49%;
+  }
+
+  .room-image-secondary-child {
+    width: 48%;
+  }
+}
+
+
+
+@media only screen and (max-width: 950px){
+  .room-image-primary {
+    display: none;
+  }
+
+  .room-image-secondary {
+    width: 100%;
+  }
+
+  .room-image-secondary-child {
+    width: 49%;
+  }
+  .room-image-secondary-child:nth-child(1) img {
+    border-radius: 1rem 0rem 0 0;
+  }
+  
+  .room-image-secondary-child:nth-child(3) img {
+    border-radius: 0 0 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 810px){
+  .room-image-container {
+    padding: 0rem 1rem 2rem 1rem;
+  }
+  .room-image-secondary-child {
+    width: 48%;
+  }
+}
+@media only screen and (max-width: 480px){
+  .room-image-container {
+    padding: 0rem .1rem 2rem .1rem;
+  }
+}
+
+@media only screen and (max-width: 325px){
+  .room-image-secondary-child {
+    width: 47%;
+  }
+}
+
 
 /* -------------------Room summary----------------- */
 
@@ -111,6 +197,7 @@
 
 .room-content-container{
   display: flex;
+  flex-wrap: wrap;
   border-bottom: 1px solid #dddddd;
   padding-bottom: .8rem;
   align-items: center;
@@ -133,7 +220,6 @@
   width: 4.5rem;
   border-radius: 3rem;
   height: 4.5rem;
-
 }
 
 .host-content-container{
@@ -161,6 +247,33 @@
   line-height: 3;
 }
 
+@media only screen and (max-width: 1350px){
+  .individual-room-container{
+    display: block;
+  }
+  .room-summary-container{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 810px){
+  .individual-room-container{
+    padding: 0rem 2rem 2.5rem 2rem;
+  }
+}
+
+@media only screen and (max-width: 540px){
+  .individual-room-container{
+    padding: 0rem .8rem 2.5rem .8rem;
+  }
+  .room-host-profile{
+    margin-top:1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  
+}
 
 
 /* ----------------------- Reserve booking form------------------ */
@@ -304,4 +417,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .pricing-left{
   text-underline-offset: .2rem;
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 1350px){
+  .room-reserve-form-container{
+    margin: auto;
+    margin-top: 2rem;
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 980px){
+  .room-reserve-form-container{
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 670px){
+  .room-reserve-form-container{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 420px){
+  .room-reserve-form-container{
+    width: 99%;
+  }
+}
+
+@media only screen and (max-width: 336px){
+  .room-reserve-form-container{
+    width: 100%;
+  }
 }

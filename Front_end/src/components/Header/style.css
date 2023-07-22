@@ -294,9 +294,31 @@
     border-right: none;
   }
 
-
   .search-bar-text2{display: none;}
 
+}
+
+@media only screen and (max-width: 360px){
+  .search-bar{
+    height:1.5rem;
+    width: 10rem;
+    justify-content: space-between;
+  }
+
+  .search-bar-text1{
+    display: none;
+  }
+  .search-bar-text{
+    border-right: none;
+  }
+
+  .search-bar-text2{display: none;}
+}
+
+@media only screen and (max-width:460px) {
+  .search-filter-div{
+    left:5%;
+  }
 }
 
 
@@ -445,9 +467,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 @media only screen and (max-width: 480px){
-    .dropdown-search-bar {
-      width:16.2rem;
-    }
+
+}
+
+
+@media only screen and (max-width: 360px){
+  .dropdown-search-bar {
+    width:15rem;
+  }
+  .dropdown-input-label {
+    margin-bottom: .3rem;
+  }
+}
+@media only screen and (max-width: 332px){
+  .dropdown-search-bar {
+    width:14rem;
+  }
+}
+
+@media only screen and (max-width: 310px){
+  .dropdown-search-bar {
+    width:12rem;
+  }
 }
 
 

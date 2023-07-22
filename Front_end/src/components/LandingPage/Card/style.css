@@ -101,3 +101,9 @@
 #section_card_content_3{
   font-weight: 700;
 }
+
+@media only screen and (max-width: 460px){
+  .section_container{
+    margin:2.5rem auto;
+  }
+}

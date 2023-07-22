@@ -148,3 +148,17 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus{
     display: none;
   }
 }
+
+@media only screen and (max-width: 440px){
+
+  .register-container{
+    width: 15rem;
+    padding: 0rem 1rem;
+  }
+  .register-input-container{
+    width:15rem;
+  }
+  .register-button{
+    width: 14rem;
+  }
+}

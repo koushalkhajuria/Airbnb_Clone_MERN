@@ -79,7 +79,7 @@ const SearchBar = (props) => {
           placeholder='check-in date'
           onChange={handleCheckInDateChange}/>
       </div>
-    
+  
       <div className="dropdown-input-wrapper">
         <label htmlFor="checkOutDate" className="dropdown-input-label">Check-out</label>
         <input 

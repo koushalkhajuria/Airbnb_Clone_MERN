@@ -12,6 +12,10 @@
   margin: auto;
 }
 
+.booking-list-title{
+  padding: 0rem 5rem;
+}
+
 .my-booking-card{
   padding:2rem 4rem 1rem 4rem;
   display: flex;
@@ -118,6 +122,43 @@
 
   } 
 }
+
+@media only screen and (max-width:750px){
+  .my-booking-card-container{
+    padding:1.5rem 0rem;
+    margin: 2rem 2rem;
+    border: 1px solid rgb(221, 221, 221); 
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px
+  }
+}
+
+@media only screen and (max-width:520px){
+  .my-booking-card-container{
+    padding:1.5rem 0rem;
+    margin: 2rem 0rem;
+  }
+}
+
+@media only screen and (max-width:450px){
+  .my-booking-card-container{
+    margin: 0rem 0;
+  
+  }
+  .my-booking-card{
+    padding:2rem 1rem 1rem 1rem;  
+  } 
+}
+
+@media only screen and (max-width:360px){
+  .booking-list-title{
+    padding:2rem 0;
+    text-align: center;
+  }
+
+}
+
+
+
 
 
 

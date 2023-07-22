@@ -13,9 +13,17 @@
   margin-right: 6rem;
   border-radius: 3rem;
   height: 4.5rem;
-
 }
 
+.hosting-listing-title-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.hosting-listing-title{
+  padding: 2rem 5rem;
+}
 
 
 
@@ -63,8 +71,41 @@
 
 .manage-delete-button:hover {
   background-color: #cd0c59;
-
 }
 
 
+@media only screen and (max-width: 940px){
+  .listing-card-container{
+    padding:0rem;
+    margin: 2rem 5rem;
+  }
+}
+@media only screen and (max-width: 880px){
+  .listing-card-container{
+    padding:0rem;
+    margin: 2rem 0;
+  }
+}
+
+@media only screen and (max-width: 730px){
+  .hosting-listing-title{
+    padding: 1rem 0rem 0 0;
+  }
+  .dashboard-host-profile img{
+    margin-right: 0rem;
+
+  }
+  
+  .hosting-listing-title-container{
+    display:block;
+    text-align: center;
+  }
+  
+}
+@media only screen and (max-width: 520px){
+  .listing-card-container{
+   margin:0;
+  }
+  
+}
 

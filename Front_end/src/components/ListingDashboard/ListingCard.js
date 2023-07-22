@@ -114,12 +114,13 @@ function ListingCard() {
     )
   }
 
+
   return (
     <>
       <Header/>
       <div className='listing-card-container'>
-        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-        <h1 style={{padding:'2rem 5rem'}}><span style={{ color: 'var(--theme)'}}>Hosted</span> Listing</h1>
+        <div className='hosting-listing-title-container'>
+        <h1 className='hosting-listing-title'><span style={{ color: 'var(--theme)'}}>Hosted</span> Listing</h1>
         <div className='dashboard-host-profile' >
           <button className='manage-delete-button' style={{padding:'.2rem', fontSize:'.8rem', width:'10rem'}} type='submit' onClick={handleCreateNewHost}> Host new Home</button>
         { dataList.result>0? <img src={`data:image/jpeg;base64,${dataList.data[0].host.profile.data}`} alt='host'></img>:null}

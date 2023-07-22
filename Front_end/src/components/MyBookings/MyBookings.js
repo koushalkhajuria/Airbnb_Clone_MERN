@@ -89,7 +89,7 @@ function MyBookingCard() {
       {
         !isLoading?
         <div className='my-booking-card-container'>
-          <h1 style={{padding:'2rem 5rem'}}><span style={{ color: 'var(--theme)'}}>Booking</span> List</h1>  
+          <h1 className='booking-list-title' ><span style={{ color: 'var(--theme)'}}>Booking</span> List</h1>  
           <div className="my-booking">
             {dataList.length!==0 ? 
               dataList.result>0?
