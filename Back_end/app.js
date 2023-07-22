@@ -11,10 +11,14 @@ const app = express();
 app.use(bodyParser.json({ limit: '20mb' }));
 
 app.use((req, res, next) => {
+<<<<<<< HEAD
   res.setHeader(
     'Access-Control-Allow-Origin',
     'https://main--mern-stack-clone.netlify.app'
   );
+=======
+  res.setHeader('Access-Control-Allow-Origin', 'https://main--mern-stack-clone.netlify.app');
+>>>>>>> ff4c5a273754ee92769af3aaf8c4f66d9e1943b6
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, PUT, PATCH, DELETE'
