@@ -2,8 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import './dashboard.css';
 import SpinLoader  from '../../assets/spinner/spinner';
-import IdContext from '../../context/RoomIdProvider';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CardSlider from '../../assets/Slider/CardSlider';
 import AuthContext from '../../context/AuthProvider';
 import Header from '../Header/Header';
@@ -11,9 +10,9 @@ import { showNotification } from '../../assets/alerts/sweetAlert';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 
 function ListingCard() {
-  const {setRoomId} = useContext(IdContext);
   const [isLoading, setIsLoading] = useState(false);
   const axiosPrivate = useAxiosPrivate();
+  const location = useLocation();
   const {auth} = useContext(AuthContext);
   const navigate = useNavigate();
   const [dataList, setDataList] = useState([]);
@@ -30,12 +29,12 @@ function ListingCard() {
       setDataList(response.data);
     } catch (err) {
       console.error(err);
+      navigate('/login', {state: {from: location}, replace: true})
     }
   }
 
   const handleRoomId = (items) => {
-    setRoomId(items); 
-    navigate('/manage');
+    navigate(`/manage/${items._id}`);
   }
  
   const handleDeleteHosted = async (items) => {
@@ -82,9 +81,10 @@ function ListingCard() {
         </div>
             <CardSlider>
             {items.images.map((item, index) => {
+              const base64String = btoa(String.fromCharCode.apply(null, item.data.data));
               return (
                 <div key={index} className="section_card_img"  >
-                  <img src={`data:image/jpeg;base64 ,${item.data}`} alt="section_card_img"/>    
+                  <img src={`data:${item.mimetype};base64,${base64String}`} alt="section_card_img"/>    
                 </div>  
               ) 
             })}

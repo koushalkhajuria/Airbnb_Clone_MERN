@@ -2,16 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';import "./style.css"
 import SpinLoader  from '../../../assets/spinner/spinner';
 import Filter from "../Filter";
-import IdContext from '../../../context/RoomIdProvider';
 import { useNavigate } from 'react-router-dom';
 import CardSlider from '../../../assets/Slider/CardSlider';
 import { axiosNormal } from '../../../services/axios';
 import { SearchDataContext } from '../../../context/SearchDataProvider';
 
 function Card(props) {
-  const {setRoomId} = useContext(IdContext)
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false);
   const {searchData, setSearchData} = useContext(SearchDataContext);
   const [quickSearch, setQuickSearch] = useState('');
   const [dataList, setDataList] = useState([]);
@@ -20,26 +18,19 @@ function Card(props) {
     setDataList([]);
     setQuickSearch(data);
   }
+
   useEffect(()=> {
     setIsLoading(true);
-    if(quickSearch){
-      fetchDataByFilter(quickSearch)
-    }
-    else if (searchData){
-      fetchDataBySearchParam(searchData);
-    }
-    else{
-      fetchData();
-    }
+    if(quickSearch){fetchDataByFilter(quickSearch)}
+    else if (searchData){fetchDataBySearchParam(searchData);}
+    else{fetchData();}
     setSearchData('')
-    
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[quickSearch, searchData])
 
 
   const fetchData = async () => {
     try {
-      
       const response = await axiosNormal.get('/');
       setDataList(response.data);
       setIsLoading(false);
@@ -66,23 +57,19 @@ function Card(props) {
       const response = await axiosNormal.get(`/search/?country=${location}&startDate=${checkInDate}&endDate=${checkOutDate}&guestCapacity=${guests}`);
       setDataList(response.data);
         setIsLoading(false);
-
     } catch (err) {
       console.error("Error fetching data:", err)
     }
   }
 
   const handleRoomId = (items) => {
-    setRoomId(items); 
-    navigate('/room');
+    navigate(`/room/${items._id}`);
   }
 
  
   
   const formatDate = (inputDate) => {
-    if(!inputDate){
-      return 'Not Available'
-    }
+    if(!inputDate){return 'Not Available'}
     const date = new Date(inputDate);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return date.toLocaleDateString('en-GB', options);
@@ -100,9 +87,10 @@ function Card(props) {
         </div>
             <CardSlider>
             {items.images.map((item, index) => {
+              const base64String = btoa(String.fromCharCode.apply(null, item.data.data));
               return (
                 <div key={index} className="section_card_img"  >
-                  <img src={`data:image/jpeg;base64,${item.data}`} alt="section_card_img"/>    
+                  <img src={`data:${item.mimetype};base64,${base64String}`} alt="section_card_img"/>    
                 </div>  
               ) 
             })}

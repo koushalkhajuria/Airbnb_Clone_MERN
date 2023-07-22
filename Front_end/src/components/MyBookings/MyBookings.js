@@ -10,26 +10,35 @@ function MyBookingCard() {
 
   const axiosPrivate = useAxiosPrivate();
   const {auth} = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const [dataList, setDataList] = useState([]);
 
 
   useEffect ( ()=> {
+    setIsLoading(true);
      fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[dataList])
+  },[])
  
 
   const fetchData =async () => {
     try {
       const response = await axiosPrivate.get(`/mybookings/${auth?.data?.userId}`)
       setDataList(response.data);
+      setIsLoading(false);
     } catch (err) {
       console.error(err);
+      navigate('/login', {state: {from: location}, replace: true})
     }
   }
-
+  
+  const base64String = (img) => {
+    console.log(img)
+    const ig =  btoa(String.fromCharCode.apply(null, img));
+   return ig
+  }
 
   const formatDate = (inputDate) => {
     if(!inputDate){ return 'Not Available'}
@@ -42,9 +51,9 @@ function MyBookingCard() {
 
   const mapData = (item,index) =>{
     return (
-      <div className='my-booking-card'>
-        <div key={index} className='mbr-right-content-1'>
-          <img className='mbr-right-content-1-img' src={`data:image/jpeg;base64,${item.image}`} alt='host profile'></img>
+      <div key={index} className='my-booking-card'>
+        <div className='mbr-right-content-1'>
+          <img className='mbr-right-content-1-img' src={`data:${item.image.mimetype};base64,${base64String(item.image.data.data)}`} alt='host profile'></img>
           <div className='mbr-right-content-1-data'>
               <div style={{fontSize:'1rem'}}>{item.description}</div>
               <div style={{fontSize:'.85rem'}}>{item.title} hosted by {item.host.name}</div>
@@ -73,11 +82,12 @@ function MyBookingCard() {
     )
   }
 
-  const handleComponentRender = () => {
-    if(auth?.data?.token){
-    return (
-      <>
-        <Header/>
+
+  return (
+    <>
+      <Header/>
+      {
+        !isLoading?
         <div className='my-booking-card-container'>
           <h1 style={{padding:'2rem 5rem'}}><span style={{ color: 'var(--theme)'}}>Booking</span> List</h1>  
           <div className="my-booking">
@@ -88,17 +98,9 @@ function MyBookingCard() {
             <SpinLoader/>
             }
           </div>
-        </div>
-      </>
-    )}  else {
-      navigate('/login', {state: {from: location}})
-      return null;
-    }
-    }
-
-  return (
-    <>
-      {handleComponentRender()}
+        </div>:
+        <SpinLoader/>
+      }
     </>
   )
 }

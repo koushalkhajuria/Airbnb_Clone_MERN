@@ -1,4 +1,36 @@
+const path = require('path');
+const fs = require('fs');
 const Room = require('../models/roomModel');
+
+exports.uploadImage = async (req, res) => {
+  try {
+    const images = [];
+    req.files.forEach(element => {
+      const { originalname, mimetype, size } = element;
+      const filePath = path.join(
+        __dirname,
+        '..',
+        'routes',
+        'uploads',
+        element.filename
+      );
+      const data = fs.readFileSync(filePath);
+      const newImage = { name: originalname, data, mimetype, size };
+      images.push(newImage);
+      fs.unlinkSync(filePath);
+    });
+    res.status(200).json({
+      status: 'success',
+      message: 'images uploaded',
+      data: images
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'err',
+      message: 'Upload only 5 images'
+    });
+  }
+};
 
 exports.getAllRooms = async (req, res) => {
   try {

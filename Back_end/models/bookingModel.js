@@ -5,7 +5,7 @@ const bookingSchema = new mongoose.Schema({
   description: { type: String, required: true, trim: true },
   roomId: { type: String, required: true },
   numberOfDays: { type: Number, required: true },
-  image: { type: String, required: true },
+  image: { type: Object, required: true },
   location: {
     address: { type: String, required: true, trim: true },
     country: { type: String, required: true, trim: true },

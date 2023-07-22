@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { showNotification } from '../../assets/alerts/sweetAlert';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import AuthContext from '../../context/AuthProvider';
+import SpinLoader from '../../assets/spinner/spinner';
 
 const FormContainer = Box;
 
@@ -31,6 +32,7 @@ const HomeImages = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const axiosPrivate = useAxiosPrivate();
+  const [isLoading, setIsLoading] = useState(false);
   const {hostData, setHostData} = useContext(HostContext)
   const [formSubmitted, setFormSubmitted] = useState(false);
   const fileInputRef = useRef(null);
@@ -39,13 +41,24 @@ const HomeImages = () => {
 
   const handleSubmit = async (values) => {
     const {images} = values
-    const imgObj = await handleImageUpload(images)
+    const formData = await handleImageUpload(images);
+    setIsLoading(true);
+    const binaryImages = await uploadImages(formData);
     const userId = auth.data.userId;
-    setHostData((prev) => {
-        return { ...prev, images: imgObj, userId };
-    });
+    setHostData((prev) => {return { ...prev, images: binaryImages, userId }});
     setFormSubmitted(true); 
     };
+
+    const uploadImages = async (data) => {
+      try {
+        const response = await axiosPrivate.post('/upload', data, {headers: { 'Content-Type': 'multipart/form-data'}});
+        return response.data.data;
+      } catch (error) {
+        setIsLoading(false);
+        showNotification(error.response.data.status, error.response.data.message)
+        console.error(error);
+      }
+    }
 
     useEffect(()=> {
       if(formSubmitted){
@@ -87,36 +100,14 @@ const HomeImages = () => {
   };
 
   const handleImageUpload = async (values) => {
-    const imageObjects = [];
-    await Promise.all(
-      values.map((image) =>
-        new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(image);
-          reader.onloadend = () => {
-            const base64String = reader.result.split(",")[1];
-            imageObjects.push({ name: image.name, data: base64String });
-            resolve(); 
-          };
-        })
-      )
-    );
-    return imageObjects;
+    const formData = new FormData();
+    values.forEach((image) => {formData.append(`images`, image)});
+    return formData;
   };
-
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };
-
-  // useEffect(() => {
-  //   if (formSubmitted) {
-  //     createHost(hostData);
-      
-  //   }
-  // }, [hostData]);
-
-
 
   const ImagePreview = styled(Avatar)(({ theme }) => ({
     width: '7rem',
@@ -127,64 +118,68 @@ const HomeImages = () => {
   }));
 
   return (
-    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-      {({ values, errors, touched, setFieldValue }) => (
-        <FormContainer className='host-profile'>
-          <Typography variant="h6" gutterBottom>
-            Home Images
-          </Typography>
-          <Form>
-            <FieldArray name="images">
-              {({ push, remove }) => (
-                <>
-                  <Grid container spacing={2}>
-                    {values.images.map((_, index) => (
-                      <Grid item key={index}>
-                        <ImagePreview src={previewImages[index]} alt={`Uploaded Image ${index + 1}`} />
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={() => handleRemoveImage(index, setFieldValue, values)}
-                        >
-                          X Remove
-                        </Button>
+    <>
+      { !isLoading?
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          {({ values, errors, touched, setFieldValue }) => (
+            <FormContainer className='host-profile'>
+              <Typography variant="h6" gutterBottom>
+                Home Images
+              </Typography>
+              <Form>
+                <FieldArray name="images">
+                  {({ push, remove }) => (
+                    <>
+                      <Grid container spacing={2}>
+                        {values.images.map((_, index) => (
+                          <Grid item key={index}>
+                            <ImagePreview src={previewImages[index]} alt={`Uploaded Image ${index + 1}`} />
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => handleRemoveImage(index, setFieldValue, values)}
+                            >
+                              X Remove
+                            </Button>
+                          </Grid>
+                        ))}
                       </Grid>
-                    ))}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      onChange={(event) => handleFileUpload(event, setFieldValue, values)}
-                      ref={fileInputRef}
-                      style={{ display: 'none' }}
-                    />
-                    <Button sx={{marginTop:'2rem'}} variant="contained" color="primary" onClick={handleUploadClick}>
-                      <IconButton
-                        component="span"
-                        style={{ color: '#ffffff' }}
-                        aria-label="Upload Image"
-                        title="Upload Image"
-                      >
-                        <CloudUploadIcon sx={{ fontSize: '.9rem' }} />
-                      </IconButton>
-                      Upload
-                    </Button>
-                    {touched.images && errors.images && (
-                      <ErrorMessage component="div" name="images" className="error-message" />
-                    )}
-                  </Grid>
-                </>
-              )}
-            </FieldArray>
-            <Button type="submit" variant="contained" color="primary" className="host-form-submit-buttons">
-              Submit
-            </Button>
-          </Form>
-        </FormContainer>
-      )}
-    </Formik>
+                      <Grid item xs={12}>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={(event) => handleFileUpload(event, setFieldValue, values)}
+                          ref={fileInputRef}
+                          style={{ display: 'none' }}
+                        />
+                        <Button sx={{marginTop:'2rem'}} variant="contained" color="primary" onClick={handleUploadClick}>
+                          <IconButton
+                            component="span"
+                            style={{ color: '#ffffff' }}
+                            aria-label="Upload Image"
+                            title="Upload Image"
+                          >
+                            <CloudUploadIcon sx={{ fontSize: '.9rem' }} />
+                          </IconButton>
+                          Upload
+                        </Button>
+                        {touched.images && errors.images && (
+                          <ErrorMessage component="div" name="images" className="error-message" />
+                        )}
+                      </Grid>
+                    </>
+                  )}
+                </FieldArray>
+                <Button type="submit" variant="contained" color="primary" className="host-form-submit-buttons">
+                  Submit
+                </Button>
+              </Form>
+            </FormContainer>
+          )}
+        </Formik>:
+        <SpinLoader/>}
+    </>  
   );
 };
 

@@ -5,9 +5,11 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { styled } from "@mui/material/styles";
+import { useNavigate } from 'react-router-dom';
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
   color: var(--medium-grey);
@@ -16,6 +18,9 @@ export default function SimpleBottomNavigation() {
   }
 `);
 
+  const handleLogin = () => {
+    navigate('/login')
+  }
 
   return (
     <div className='bottom-nav'>
@@ -28,7 +33,7 @@ export default function SimpleBottomNavigation() {
       >
         <BottomNavigationAction className='bottom-nav-option' label="Explore" icon={<SearchRoundedIcon sx={{fontSize:"1.5rem"}}/>} />
         <BottomNavigationAction className='bottom-nav-option' label="Wishlists" icon={<FavoriteBorderIcon sx={{fontSize:"1.5rem"}}/>} />
-        <BottomNavigationAction className='bottom-nav-option' label="Log in" icon={<AccountCircleOutlinedIcon sx={{fontSize:"1.5rem"}}/>} />
+        <BottomNavigationAction className='bottom-nav-option' onClick={handleLogin} label="Log in" icon={<AccountCircleOutlinedIcon sx={{fontSize:"1.5rem"}}/>} />
       </BottomNavigation>
     </div>
   );

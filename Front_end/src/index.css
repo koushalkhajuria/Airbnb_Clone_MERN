@@ -16,6 +16,7 @@
 body {
   margin: 0;
   font-family: "Nunito Sans", sans-serif;
+  transition: all .2s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -18,23 +18,16 @@ function Filter(props) {
   const slideDataLeft = () => {
     var temp =document.getElementsByClassName("quick-filter-div")[0].offsetWidth
     setSlideIndex((prev)=>{
-      if(slideIndex>=1926-temp){
-        return 0
-      }
-      else{
-        return (prev+temp/5)
-      }
+      if(slideIndex>=1926-temp){return 0}
+      else{return (prev+temp/5)}
     })
   }
+
   const slideDataRight = () => {
     var temp = document.getElementsByClassName("quick-filter-div")[0].offsetWidth
     setSlideIndex((prev)=>{
-      if(slideIndex<=0){
-        return 1926-temp
-      }
-      else{
-        return (prev-temp/5)
-      }
+      if(slideIndex<=0){return 1926-temp}
+      else{return (prev-temp/5)}
     })
   }
 

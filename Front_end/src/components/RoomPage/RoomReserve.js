@@ -36,7 +36,7 @@ function RoomReserve({data}) {
     const bookingsData = {
       userId: auth?.data?.userId,
       roomId: data._id,
-      image:data?.images[0]?.data,
+      image:data?.images[0],
       title:data.title,
       location: {...data.location},
       description: data.description,

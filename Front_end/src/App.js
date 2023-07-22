@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import RoomPage from './pages/RoomPage';
-import { RoomIdProvider } from './context/RoomIdProvider';
 import { BookingProvider } from './context/BookingProvider';
 import HostPage from './pages/HostPage';
 import BecomeHostProvider from './context/BecomeHostProvider';
@@ -17,19 +16,18 @@ import SearchDataProvider from './context/SearchDataProvider';
 function App() {
   return (
     
-    <RoomIdProvider>
       <BookingProvider>
       <BecomeHostProvider>
       <SearchDataProvider>    
         <Router>
           <Routes>
               <Route path='/' Component={LandingPage}></Route>
-              <Route path='/room' Component={RoomPage}></Route>
+              <Route path='/room/:id' Component={RoomPage}></Route>
               <Route path='/room/bookings' Component={BookingPage}></Route>
               <Route path='/login' Component={LoginPage}></Route>
               <Route path='/register' Component={RegisterPage}></Route>
               <Route path='/becomehost' Component={HostPage}></Route>
-              <Route path='/manage' Component={ManagePage}></Route>
+              <Route path='/manage/:id' Component={ManagePage}></Route>
               <Route path='/dashboard' Component={ListingCardPage}></Route>
               <Route path='/mybookings' Component={MyBookingPage}></Route>
           </Routes>
@@ -37,7 +35,6 @@ function App() {
       </SearchDataProvider>
       </BecomeHostProvider>
       </BookingProvider>
-    </RoomIdProvider>
   )
 }
 

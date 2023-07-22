@@ -12,6 +12,7 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { useNavigate } from 'react-router-dom';
 import './BookRoom.css';
 import logo from '../../assets/logo/logo.png'
+import SpinLoader from '../../assets/spinner/spinner';
 
 const AirbnbColors = {
   coral: '#FF5A5F',
@@ -47,13 +48,12 @@ const airbnbTheme = createTheme({
 });
 
 
-
 function BookRoom() {
   const navigate = useNavigate();
   const {bookingData, setBookingData} = useContext(BookingContext) 
   const axiosPrivate = useAxiosPrivate();
+  const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
-
   
   const handleDialogOpen = () => {
     setOpen(true);
@@ -64,16 +64,18 @@ function BookRoom() {
   };
 
   const handleAction = async () => {
-    await bookApi()
+    setIsLoading(true);
+    bookApi()
   }
 
   const bookApi = async () => {
     try {
       const response = await axiosPrivate.post('/room/booking', bookingData);
       if(response?.data){
-        setBookingData({});
+        setBookingData({});  
         showNotification(response?.data.status, response?.data.message)
-        navigate('/')
+        setIsLoading(false);
+        navigate('/mybookings')
       }
     } catch (err) {
       console.error(err)
@@ -106,9 +108,7 @@ function BookRoom() {
   };
   
   const formatDate = (inputDate) => {
-    if(!inputDate){
-      return 'Not Available'
-    }
+    if(!inputDate){return 'Not Available'}
     const date = new Date(inputDate);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return date.toLocaleDateString('en-GB', options);
@@ -186,12 +186,17 @@ function BookRoom() {
       </>
     )
   }
+  const base64String = (img) => {
+    console.log(img)
+    const ig =  btoa(String.fromCharCode.apply(null, img));
+   return ig
+  }
 
   const bookRoomDetailsRight = () => {
     return (
       <>
         <div className='br-right-content-1'>
-          <img className='br-right-content-1-img' src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/lpibo-ew-1656015868.jpg' alt='host profile'></img>
+          <img className='br-right-content-1-img' src={`data:${bookingData.image.mimetype};base64,${base64String(bookingData.image.data.data)}`} alt='host profile'></img>
           <div className='br-right-content-1-data'>
               <div style={{fontSize:'1.1rem'}}>{bookingData.description}</div>
               <div style={{fontSize:'.85rem'}}>{bookingData.title} hosted by {bookingData.host.name}</div>
@@ -228,18 +233,25 @@ function BookRoom() {
 
 
   return (
-    <div className='book-room-container'>
-      {bookRoomTitle()}
-      <div className='book-room-details'>
-        <div className='book-room-details-left'>
-          {bookRoomDetailsLeft()}
-        </div>
-        <div className='book-room-details-right'>
-          {bookRoomDetailsRight()}
-        </div>
-      </div>
-      <ConfirmBooking/>
-    </div>
+    <>
+      {
+        !isLoading?
+        <div className='book-room-container'>
+          {bookRoomTitle()}
+          <div className='book-room-details'>
+            <div className='book-room-details-left'>
+              {bookRoomDetailsLeft()}
+            </div>
+            <div className='book-room-details-right'>
+              {bookRoomDetailsRight()}
+            </div>
+          </div>
+          <ConfirmBooking/>
+        </div>:
+        <SpinLoader/>
+
+      }
+    </>
   )
 }
 
