@@ -133,10 +133,17 @@
 }
 
 @media only screen and (max-width:520px){
+
   .my-booking-card-container{
-    padding:1.5rem 0rem;
-    margin: 2rem 0rem;
+    padding:0 0rem;
+    margin: 0rem 0rem;
   }
+
+  .my-booking-card{
+    padding:0rem 1rem 1rem 1rem;  
+    margin-top:1.5rem;
+  } 
+
 }
 
 @media only screen and (max-width:450px){
@@ -144,9 +151,7 @@
     margin: 0rem 0;
   
   }
-  .my-booking-card{
-    padding:2rem 1rem 1rem 1rem;  
-  } 
+
 }
 
 @media only screen and (max-width:360px){

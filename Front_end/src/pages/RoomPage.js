@@ -6,6 +6,7 @@ import RoomSummary from '../components/RoomPage/RoomSummary';
 import SpinLoader  from '../assets/spinner/spinner';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import SimpleBottomNavigation from '../components/Footer/BottomNav';
 
 function RoomPage() {
   const { id } = useParams();
@@ -43,6 +44,7 @@ function RoomPage() {
         ) : (
           <SpinLoader />
         )}
+      <SimpleBottomNavigation/>
     </>
   )
 }
