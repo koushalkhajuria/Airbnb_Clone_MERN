@@ -1,12 +1,47 @@
 const path = require('path');
 const fs = require('fs');
+const { promisify } = require('util');
 const Room = require('../models/roomModel');
+
+const writeFileAsync = promisify(fs.writeFile);
+
+function generateUniqueFilename(originalName) {
+  const timestamp = new Date().getTime();
+  const extension = path.extname(originalName);
+  const filename = `${timestamp}${extension}`;
+
+  return filename;
+}
+
+const base64ToImage = async dataObject => {
+  const { name, data } = dataObject;
+  const folderPath = path.join(__dirname, 'uploads');
+  const extension = path.extname(name).toLowerCase();
+  const base64Data = data.replace(/^data:image\/\w+;base64,/, '');
+  const binaryData = Buffer.from(base64Data, 'base64');
+  const filename = generateUniqueFilename(name);
+  const filePath = path.join(folderPath, filename);
+  if (!fs.existsSync(folderPath)) {
+    fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
+  }
+  try {
+    await writeFileAsync(filePath, binaryData); // Use await here to wait for the file writing to complete
+    const fileObject = {
+      mimetype: `image/${extension.slice(1)}`,
+      filePath: filePath
+    };
+    return fileObject;
+  } catch (err) {
+    console.error('Error saving the image:', err);
+    throw err;
+  }
+};
 
 exports.uploadImage = async (req, res) => {
   try {
     const images = [];
     req.files.forEach(element => {
-      const { originalname, mimetype, size } = element;
+      const { originalname, mimetype } = element;
       const filePath = path.join(
         __dirname,
         '..',
@@ -14,10 +49,9 @@ exports.uploadImage = async (req, res) => {
         'uploads',
         element.filename
       );
-      const data = fs.readFileSync(filePath);
-      const newImage = { name: originalname, data, mimetype, size };
+      const newImage = { name: originalname, mimetype, filePath };
       images.push(newImage);
-      fs.unlinkSync(filePath);
+      // fs.unlinkSync(filePath);
     });
     res.status(200).json({
       status: 'success',
@@ -37,6 +71,16 @@ exports.getAllRooms = async (req, res) => {
     const queryObj = { ...req.query };
     const query = Room.find(queryObj);
     const rooms = await query;
+    rooms.forEach(ele => {
+      const hostData = fs.readFileSync(ele.host.profile.filePath);
+      const str = hostData.toString('base64');
+      ele.host.profile.data = str;
+      ele.images.forEach(child => {
+        const data = fs.readFileSync(child.filePath);
+        const base64String = data.toString('base64');
+        child.data = base64String;
+      });
+    });
     res.status(200).json({
       status: 'success',
       result: rooms.length,
@@ -53,6 +97,14 @@ exports.getAllRooms = async (req, res) => {
 exports.getRoom = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
+    const hostData = fs.readFileSync(room.host.profile.filePath);
+    const str = hostData.toString('base64');
+    room.host.profile.data = str;
+    room.images.forEach(ele => {
+      const data = fs.readFileSync(ele.filePath);
+      const base64String = data.toString('base64');
+      ele.data = base64String;
+    });
     res.status(200).json({
       status: 'success',
       data: room
@@ -97,6 +149,8 @@ exports.getRoomBySearchParam = async (req, res) => {
 
 exports.createRoom = async (req, res) => {
   try {
+    const dataObj = await base64ToImage(req.body.host.profile);
+    req.body.host.profile = { ...dataObj };
     const newRoom = await Room.create(req.body);
     res.status(200).json({
       status: 'success',
@@ -187,6 +241,11 @@ exports.updateRoom = async (req, res) => {
 
 exports.deleteRoom = async (req, res) => {
   try {
+    const temp = await Room.findById(req.params.id);
+    fs.unlinkSync(temp.host.profile.filePath);
+    temp.images.forEach(ele => {
+      fs.unlinkSync(ele.filePath);
+    });
     await Room.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'success',

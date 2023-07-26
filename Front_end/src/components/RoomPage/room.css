@@ -56,18 +56,19 @@
 
 .room-image-container {
   padding: 0rem 5.5rem 2rem 5rem;
+  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
 }
 
 .room-image-primary {
   width:50%;
-  height: 50%;
-  padding:.2rem ;
+  padding:0 .2rem ;
 }
 
 .room-image-primary img {
   transition: all 0.1s;
+  height: 40rem;
   border-radius: 1rem 0 0 1rem;
 }
 
@@ -77,15 +78,19 @@
 
 .room-image-secondary {
   width: 49%;
-  width: 49%;
   display: flex;
   flex-wrap: wrap;
-  padding-bottom:.4rem;
+}
+.room-image-secondary:nth-child(4) {
+  padding-bottom:0rem;
+}
+.room-image-secondary:nth-child(3) {
+  padding-bottom:0rem;
 }
 
 .room-image-secondary-child {
   width: 49%;
-  padding:.2rem ;
+  padding:0 .2rem ;
 }
 
 .room-image-secondary-child img {
@@ -111,33 +116,59 @@
 
 .room-image {
   width: 100%;
-  height:100%;
+  height: 19.7rem;
   object-fit: cover;
 }
 
+@media only screen and (max-width: 1600px){
+  .room-image {
+    height: 16.7rem;
+  }
+  .room-image-primary img {
+    height: 34rem;
+  }
+}
+  
 
 @media only screen and (max-width: 1469px){
   
   .room-image-primary {
     width:50%;
-    height: 49%;
   }
 
   .room-image-secondary {
     width: 49%;
-    height: 49%;
   }
 
   .room-image-secondary-child {
     width: 48%;
   }
+  .room-image {
+    height: 14.7rem;
+  }
+  .room-image-primary img {
+    height: 30rem;
+  }
 }
 
 
 
+@media only screen and (max-width: 1284px){
+  .room-image {
+    height: 12.7rem;;
+  }
+  .room-image-primary img {
+    height: 26rem;
+  }
+
+}
 @media only screen and (max-width: 950px){
   .room-image-primary {
     display: none;
+  }
+
+  .room-image {
+    height: 18rem;
   }
 
   .room-image-secondary {
@@ -160,19 +191,46 @@
   .room-image-container {
     padding: 0rem 1rem 2rem 1rem;
   }
+
+
   .room-image-secondary-child {
     width: 48%;
   }
 }
+
+@media only screen and (max-width: 666px){
+  .room-image {
+    height: 15rem;
+  }
+}
+
+@media only screen and (max-width: 550px){
+  .room-image {
+    height: 13rem;
+  }
+}
+
 @media only screen and (max-width: 480px){
   .room-image-container {
     padding: 0rem .1rem 2rem .1rem;
+  }
+  .room-image {
+    height: 12rem;
+  }
+}
+
+@media only screen and (max-width: 420px){
+  .room-image {
+    height: 10rem;
   }
 }
 
 @media only screen and (max-width: 325px){
   .room-image-secondary-child {
     width: 47%;
+  }
+  .room-image {
+    height: 8rem;
   }
 }
 

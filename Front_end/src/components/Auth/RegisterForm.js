@@ -46,6 +46,7 @@ const RegisterForm = () => {
       setAuth('');
       console.error(err);
       showNotification(err.response.data.status, err.response.data.message)
+      setIsLoading(false);
     }
   }
 

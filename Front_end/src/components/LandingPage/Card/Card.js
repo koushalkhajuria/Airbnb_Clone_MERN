@@ -87,10 +87,9 @@ function Card(props) {
         </div>
             <CardSlider>
             {items.images.map((item, index) => {
-              const base64String = btoa(String.fromCharCode.apply(null, item.data.data));
               return (
                 <div key={index} className="section_card_img"  >
-                  <img src={`data:${item.mimetype};base64,${base64String}`} alt="section_card_img"/>    
+                  <img src={`data:${item.mimetype};base64,${item.data}`} alt="section_card_img"/>    
                 </div>  
               ) 
             })}
