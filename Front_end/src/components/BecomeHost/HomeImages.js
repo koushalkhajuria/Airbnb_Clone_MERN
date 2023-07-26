@@ -42,7 +42,7 @@ const HomeImages = () => {
   const handleSubmit = async (values) => {
     const {images} = values
     const formData = await handleImageUpload(images);
-    // setIsLoading(true);
+    setIsLoading(true);
     const binaryImages = await uploadImages(formData);
     const userId = auth.data.userId;
     setHostData((prev) => {return { ...prev, images: binaryImages, userId }});
