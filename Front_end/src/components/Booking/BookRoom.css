@@ -173,6 +173,7 @@
 @media only screen and (max-width:1100px){
   .book-room-details{
     display: block;
+    margin-bottom:3rem;
   }
 
   .book-room-title{

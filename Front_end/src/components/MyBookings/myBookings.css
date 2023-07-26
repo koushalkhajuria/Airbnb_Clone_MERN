@@ -5,7 +5,8 @@
   border-radius: .9rem; 
   color: var(--font-grey);
   letter-spacing: .5px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  margin-bottom:3rem;
 }
 
 .my-booking{
