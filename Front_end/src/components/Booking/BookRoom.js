@@ -192,7 +192,11 @@ function BookRoom() {
     return (
       <>
         <div className='br-right-content-1'>
-          <img className='br-right-content-1-img' src={`data:${bookingData.image.mimetype};base64,${bookingData.image.data}`} alt='host profile'></img>
+        {bookingData.image.filePath?
+        <img className='br-right-content-1-img' src={`data:${bookingData.image.mimetype};base64,${bookingData.image.data}`} alt='host profile'></img>:
+        <img className='br-right-content-1-img' src={bookingData.image.data} alt='host profile'></img>
+
+        }
           <div className='br-right-content-1-data'>
               <div style={{fontSize:'1.1rem'}}>{bookingData.description}</div>
               <div style={{fontSize:'.85rem'}}>{bookingData.title} hosted by {bookingData.host.name}</div>

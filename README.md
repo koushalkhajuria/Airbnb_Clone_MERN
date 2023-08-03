@@ -1,8 +1,23 @@
 # Airbnb_Clone_MERN
 
-Down the zip file
+This is an Airbnb clone with full functionality including room booking, host management, and user authentication using JWT token,
+
+Created a user-friendly interface for users to easily register, login, and view their bookings
+
+Successfully designed and deployed a fully functional room rentingand booking web application.
+
+
+
+
+
+Download the zip file
+
 Run npm install for the React front End
 Run npm install for the Node Backend
+
+
+
+
 
 Environment variable Names - Add these values and Viola You have a fully working MERN stack project ready
 NODE_ENV 
@@ -11,6 +26,9 @@ DATABASE
 DATABASE_PASSWORD 
 JWT_ACCESS_TOKEN 
 JWT_REFRESH_TOKEN 
+
+
+
 
 
 API Docs - 
