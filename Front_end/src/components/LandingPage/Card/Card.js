@@ -89,7 +89,10 @@ function Card(props) {
             {items.images.map((item, index) => {
               return (
                 <div key={index} className="section_card_img"  >
-                  <img src={`data:${item.mimetype};base64,${item.data}`} alt="section_card_img"/>    
+                {item.filePath?
+                  <img src={`data:${item.mimetype};base64,${item.data}`} alt="section_card_img"/>:
+                  <img src={item.data} alt = "card_img"/> 
+                }
                 </div>  
               ) 
             })}

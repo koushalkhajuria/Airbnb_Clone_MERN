@@ -48,7 +48,11 @@ function MyBookingCard() {
     return (
       <div key={index} className='my-booking-card'>
         <div className='mbr-right-content-1'>
-          <img className='mbr-right-content-1-img' src={`data:${item.image.mimetype};base64,${item.image.data}`} alt='host profile'></img>
+        {console.log(item.image)}
+        {item.image.filePath?
+        <img className='mbr-right-content-1-img' src={`data:${item.image.mimetype};base64,${item.image.data}`} alt='host profile'></img>:
+        <img className='mbr-right-content-1-img' src={item.image.data} alt='host profile'></img>  
+        }
           <div className='mbr-right-content-1-data'>
               <div style={{fontSize:'1rem'}}>{item.description}</div>
               <div style={{fontSize:'.85rem'}}>{item.title} hosted by {item.host.name}</div>

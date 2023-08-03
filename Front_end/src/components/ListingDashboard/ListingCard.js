@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import './dashboard.css';
 import SpinLoader  from '../../assets/spinner/spinner';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CardSlider from '../../assets/Slider/CardSlider';
 import AuthContext from '../../context/AuthProvider';
 import Header from '../Header/Header';
 import { showNotification } from '../../assets/alerts/sweetAlert';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import ListingDashboardSlider from '../../assets/Slider/ListingDashboardSlider';
 
 function ListingCard() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +20,7 @@ function ListingCard() {
     fetchData();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[dataList])
+  },[])
  
   const fetchData =async () => {
     try {
@@ -76,18 +75,18 @@ function ListingCard() {
     return (
       <div key ={index} className="section_cards">
         <div className='section-card-img-container'>
-        <div onClick={(e) => e.stopPropagation()}>
-          <FavoriteTwoToneIcon sx={{zIndex:'10', position:"absolute", right:"5%", top:"5%"}} className='card-like-icon'/>       
-        </div>
-            <CardSlider>
+        <ListingDashboardSlider> 
             {items.images.map((item, index) => {
               return (
-                <div key={index} className="section_card_img"  >
-                  <img src={`data:${item.mimetype};base64,${item.data}`} alt="section_card_img"/>    
+                <div style={{background:"red"}} key={index} className="section_card_img"  >
+                {item.filePath?
+                  <img src={`data:${item.mimetype};base64,${item.data}`} alt="section_card_img"/>:
+                  <img src={item.data} alt = "card_img"/> 
+                }
                 </div>  
               ) 
             })}
-        </CardSlider>      
+        </ListingDashboardSlider>      
         
         </div>
         <div className="section_card_content">
@@ -122,7 +121,11 @@ function ListingCard() {
         <h1 className='hosting-listing-title'><span style={{ color: 'var(--theme)'}}>Hosted</span> Listing</h1>
         <div className='dashboard-host-profile' >
           <button className='manage-delete-button' style={{padding:'.2rem', fontSize:'.8rem', width:'10rem'}} type='submit' onClick={handleCreateNewHost}> Host new Home</button>
-        { dataList.result>0? <img src={`data:image/jpeg;base64,${dataList.data[0].host.profile.data}`} alt='host'></img>:null}
+        { dataList.result>0? 
+          dataList.data[0].host.profile.filePath?
+          <img src={`data:image/jpeg;base64,${dataList.data[0].host.profile.data}`} alt='host'></img>:
+          <img src={dataList.data[0].host.profile.data} alt='host'></img>
+        :null}
       </div>
         </div>
         {!isLoading?   

@@ -32,7 +32,6 @@ const base64ToImage = async dataObject => {
     };
     return fileObject;
   } catch (err) {
-    console.error('Error saving the image:', err);
     throw err;
   }
 };
@@ -65,6 +64,13 @@ exports.uploadImage = async (req, res) => {
     });
   }
 };
+// https://i.ibb.co/DY8D2Xm/23.webp
+
+// C:\Users\koush\Desktop\Projects\Airbnb_Mern_Stack_Clone\Airbnb_Clone_MERN\Back_end\routes\uploads\images-1691042472640-661432702.webp
+// C:\Users\koush\Desktop\Projects\Airbnb_Mern_Stack_Clone\Airbnb_Clone_MERN\Back_end\routes\uploads\images-1691042472641-866727738.webp
+// C:\Users\koush\Desktop\Projects\Airbnb_Mern_Stack_Clone\Airbnb_Clone_MERN\Back_end\routes\uploads\images-1691042472643-210148842.webp
+// C:\Users\koush\Desktop\Projects\Airbnb_Mern_Stack_Clone\Airbnb_Clone_MERN\Back_end\routes\uploads\images-1691042472647-795086996.webp
+// C:\Users\koush\Desktop\Projects\Airbnb_Mern_Stack_Clone\Airbnb_Clone_MERN\Back_end\routes\uploads\images-1691042472649-17119047.webp
 
 exports.getAllRooms = async (req, res) => {
   try {
@@ -72,13 +78,17 @@ exports.getAllRooms = async (req, res) => {
     const query = Room.find(queryObj);
     const rooms = await query;
     rooms.forEach(ele => {
-      const hostData = fs.readFileSync(ele.host.profile.filePath);
-      const str = hostData.toString('base64');
-      ele.host.profile.data = str;
+      if (ele.host.profile.filePath) {
+        const hostData = fs.readFileSync(ele.host.profile.filePath);
+        const str = hostData.toString('base64');
+        ele.host.profile.data = str;
+      }
       ele.images.forEach(child => {
-        const data = fs.readFileSync(child.filePath);
-        const base64String = data.toString('base64');
-        child.data = base64String;
+        if (child.filePath) {
+          const data = fs.readFileSync(child.filePath);
+          const base64String = data.toString('base64');
+          child.data = base64String;
+        }
       });
     });
     res.status(200).json({
@@ -97,13 +107,17 @@ exports.getAllRooms = async (req, res) => {
 exports.getRoom = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
-    const hostData = fs.readFileSync(room.host.profile.filePath);
-    const str = hostData.toString('base64');
-    room.host.profile.data = str;
+    if (room.host.profile.filePath) {
+      const hostData = fs.readFileSync(room.host.profile.filePath);
+      const str = hostData.toString('base64');
+      room.host.profile.data = str;
+    }
     room.images.forEach(ele => {
-      const data = fs.readFileSync(ele.filePath);
-      const base64String = data.toString('base64');
-      ele.data = base64String;
+      if (ele.filePath) {
+        const data = fs.readFileSync(ele.filePath);
+        const base64String = data.toString('base64');
+        ele.data = base64String;
+      }
     });
     res.status(200).json({
       status: 'success',

@@ -16,7 +16,10 @@ function RoomSummary({data}) {
         
       </div>
       <div className='room-host-profile'>
-        <img src={`data:image/jpeg;base64,${data.host.profile.data}`} alt='host'></img>
+        {data.host.profile.filePath?
+         <img src={`data:image/jpeg;base64,${data.host.profile.data}`} alt='host'></img>:
+         <img src={data.host.profile.data} alt='host'></img>    
+        }
       </div>
     </div>
     )

@@ -13,6 +13,7 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use((req, res, next) => {
   res.setHeader(
     'Access-Control-Allow-Origin',
+    // 'http://localhost:3000'
     'https://main--mern-stack-clone.netlify.app'
   );
   res.setHeader(
@@ -25,7 +26,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// 'http://localhost:3000'
 app.use(cookieParser());
 
 app.use('/api/v1', authRouter);
